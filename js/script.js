@@ -14,12 +14,11 @@ var repos = JSON.parse(httpGet(requestUrl))
 
 var res = ''
 
-for (var i in repos) {
-	var repo = repos[i]
+repos.forEach(function(repo) {
 	if (repo.name!='levg34.github.io') {
 		var repoUrl = 'https://levg34.github.io/'+repo.name
 		res += '<a href="'+repoUrl+'">'+repo.name+'</a> - '+repo.description+'<br>'
 	}
-}
+})
 
 projectsArea.innerHTML = res
