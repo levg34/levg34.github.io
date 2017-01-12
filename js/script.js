@@ -8,7 +8,9 @@ var pass = prompt('Token:', '')
 function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest()
 	xmlHttp.open('GET',theUrl,false) // false for synchronous request
-	xmlHttp.setRequestHeader("Authorization", "Basic " + btoa(user + ":" + pass))
+	if (pass) {
+		xmlHttp.setRequestHeader("Authorization", "Basic " + btoa(user + ":" + pass))
+	}
 	xmlHttp.send(null)
 	return xmlHttp.responseText
 }
