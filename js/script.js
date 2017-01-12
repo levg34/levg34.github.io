@@ -1,9 +1,26 @@
 var projectsArea = document.getElementById('projects')
 
 var baseUrl = 'https://api.github.com'
+
+function readTextFile(file) {
+	var rawFile = new XMLHttpRequest();
+	rawFile.open("GET", file, false);
+	rawFile.onreadystatechange = function ()
+	{
+		if(rawFile.readyState === 4)
+		{
+			if(rawFile.status === 200 || rawFile.status == 0)
+			{
+				var allText = rawFile.responseText;
+				return(allText);
+			}
+		}
+	}
+	rawFile.send(null);
+}
+
 var user = 'levg34'
-var requestUrl = baseUrl+'/users/'+user+'/repos'
-var pass = prompt('Token:', '')
+var pass = localStorage.token
 
 function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest()
@@ -15,14 +32,10 @@ function httpGet(theUrl) {
 	return xmlHttp.responseText
 }
 
+var requestUrl = baseUrl+'/users/'+user+'/repos?sort=pushed'
 var repos = JSON.parse(httpGet(requestUrl))
 
 console.log(repos)
-
-repos.forEach(function(repo) {
-	var lastcommit = JSON.parse(httpGet(repo.commits_url.split('{')[0]))[0]
-	console.log(lastcommit.commit.author.date)
-})
 
 var res = ''
 
