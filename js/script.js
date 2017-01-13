@@ -66,3 +66,4 @@ if (res=='<ol></ol>') {
 }
 
 projectsArea.innerHTML = res
+sessionStorage.clear()
