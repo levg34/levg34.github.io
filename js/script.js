@@ -31,7 +31,7 @@ console.log(repos)
 
 var res = '<ol>'
 
-repos.forEach(function(repo) {
+if ('forEach' in repos) repos.forEach(function(repo) {
 	var branches
 	if (sessionStorage[repo.name+'_branches']) {
 		branches = JSON.parse(sessionStorage[repo.name+'_branches'])
@@ -40,7 +40,7 @@ repos.forEach(function(repo) {
 		sessionStorage[repo.name+'_branches'] = JSON.stringify(branches)
 	}
 	var haslink = false
-	branches.forEach(function(branch){
+	if ('forEach' in branches) branches.forEach(function(branch){
 		var name = branch.name
 		if (name == 'gh-pages') {
 			haslink=true
@@ -66,4 +66,3 @@ if (res=='<ol></ol>') {
 }
 
 projectsArea.innerHTML = res
-sessionStorage.clear()
