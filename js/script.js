@@ -12,19 +12,23 @@ function httpGet(theUrl) {
 	if (pass) {
 		xmlHttp.setRequestHeader("Authorization", "Basic " + btoa(user + ":" + pass))
 	}
-	xmlHttp.send(null)
-	remainingRequests = xmlHttp.getResponseHeader('X-RateLimit-Remaining')
-	requestLimitReset = xmlHttp.getResponseHeader('X-RateLimit-Reset')
-	return xmlHttp.responseText
+	try {
+		xmlHttp.send(null)
+		remainingRequests = xmlHttp.getResponseHeader('X-RateLimit-Remaining')
+		requestLimitReset = xmlHttp.getResponseHeader('X-RateLimit-Reset')
+		return xmlHttp.responseText
+	} catch (e) {
+		return JSON.stringify({error:e})
+	}
 }
 
 var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'pushed'
-var repos
+var repos = {}
 if (sessionStorage.repos) {
 	repos = JSON.parse(sessionStorage.repos)
 } else {
 	repos = JSON.parse(httpGet(requestUrl))
-	sessionStorage.repos = JSON.stringify(repos)
+	if (!repos.error) sessionStorage.repos = JSON.stringify(repos)
 }
 
 console.log(repos)
@@ -32,12 +36,12 @@ console.log(repos)
 var res = '<ol>'
 
 if ('forEach' in repos) repos.forEach(function(repo) {
-	var branches
+	var branches = {}
 	if (sessionStorage[repo.name+'_branches']) {
 		branches = JSON.parse(sessionStorage[repo.name+'_branches'])
 	} else {
 		branches = JSON.parse(httpGet(repo.branches_url.split('{')[0]))
-		sessionStorage[repo.name+'_branches'] = JSON.stringify(branches)
+		if (!branches.error) sessionStorage[repo.name+'_branches'] = JSON.stringify(branches)
 	}
 	var haslink = false
 	if ('forEach' in branches) branches.forEach(function(branch){
@@ -57,11 +61,13 @@ if ('forEach' in repos) repos.forEach(function(repo) {
 res += '</ol>'
 
 if (res=='<ol></ol>') {
-	if (remainingRequests<1) {
+	if (remainingRequests && remainingRequests < 1) {
 		res = '<h2 class="error">Maximum number of requests to server exceeded!</h2>' +
-			'<h3 class="error">Try again in ' + Math.floor((requestLimitReset-new Date().getTime()/1000) / 60) + ' minutes</h3>'
+			'<h3 class="error">Try again in ' + Math.floor((requestLimitReset - new Date().getTime() / 1000) / 60) + ' minutes.</h3>'
+	} else if (repos.error) {
+		res = '<h2 class="error">Error contacting GitHub API server.</h2>'
 	} else {
-		res = '<h2 class="error">An unknown problem occured</h2>'
+		res = '<h2 class="error">An unknown problem occured.</h2>'
 	}
 }
 
