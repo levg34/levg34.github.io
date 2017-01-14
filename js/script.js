@@ -61,7 +61,7 @@ if ('forEach' in repos) repos.forEach(function(repo) {
 res += '</ol>'
 
 if (res=='<ol></ol>') {
-	if (remainingRequests && remainingRequests < 1) {
+	if (remainingRequests!=null && remainingRequests < 1) {
 		res = '<h2 class="error">Maximum number of requests to server exceeded!</h2>' +
 			'<h3 class="error">Try again in ' + Math.floor((requestLimitReset - new Date().getTime() / 1000) / 60) + ' minutes.</h3>'
 	} else if (repos.error) {
