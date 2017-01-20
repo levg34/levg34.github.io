@@ -6,6 +6,8 @@ var pass = localStorage.token
 var remainingRequests = 60
 var requestLimitReset = 0
 
+var specialRepos = [{name:'nodejs-chat',url:'http://nodechat-levg34.rhcloud.com/'}]
+
 function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest()
 	xmlHttp.open('GET',theUrl,false) // false for synchronous request
@@ -50,11 +52,21 @@ if ('forEach' in repos) repos.forEach(function(repo) {
 			haslink=true
 		}
 	})
+
 	if (haslink) {
 		var repoUrl = 'https://levg34.github.io/'+repo.name
 		res += '<li><a href="'+repoUrl+'">'+repo.name+'</a> - '+repo.description+'</li>'
 	} else {
-		res += '<li>'+repo.name+' - '+repo.description+'</li>'
+		var tab = specialRepos.map(function (srepo) {
+			return srepo.name
+		})
+		var index = tab.indexOf(repo.name)
+		if (index>-1) {
+			var repoUrlS = specialRepos[index].url
+			res += '<li><a href="'+repoUrlS+'">'+repo.name+'</a> - '+repo.description+'</li>'
+		} else {
+			res += '<li>'+repo.name+' - '+repo.description+'</li>'
+		}
 	}
 })
 
