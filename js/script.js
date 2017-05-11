@@ -6,7 +6,7 @@ var pass = localStorage.token
 var remainingRequests = 60
 var requestLimitReset = 0
 
-var specialRepos = [{name:'levg34.github.io',url:'.',message:' (this page)'},{name:'nodejs-chat',url:'http://nodechat-levg34.rhcloud.com/'}]
+var specialRepos = [{name:'levg34.github.io',url:'.',message:' (this page)'},{name:'nodejs-chat',url:'http://nodechat-levg34.rhcloud.com/'},{name:'image-uploader',url:'http://uploader-levg34.rhcloud.com/'}]
 
 function httpGet(theUrl) {
 	var xmlHttp = new XMLHttpRequest()
