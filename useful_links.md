@@ -1,3 +1,4 @@
 - https://github.com/philschatz/octokat.js
 - https://developer.github.com/v3/repos/
 - https://api.github.com/users/levg34/repos
+- https://developer.github.com/v3/repos/pages/
