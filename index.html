@@ -3,14 +3,73 @@
   <head>
     <meta charset="utf-8">
     <title>levg34 personal pages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/style.css">
     <link href="./favicon.ico" rel="icon" type="image/x-icon"/>
   </head>
   <body>
-    <h1>Welcome to levg34 personal pages</h1>
-    <h2>List of my GitHub projects</h2>
-    <h3>Ordered by "last commit"</h3>
-    <div id="projects"></div>
+    <div class="container" ng-app="app">
+      <h1>Welcome to levg34 personal pages</h1>
+      <h2>List of my GitHub projects</h2>
+      <h3>Ordered by "last commit"</h3>
+      <div class="list-group" ng-controller="projectListCtrl">
+        <a href="{{repo.homepage}}" class="list-group-item list-group-item-info" ng-repeat="repo in projects">
+          <div class="row">
+            <div class="hidden-xs col-sm-1"><img src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" style="width:100%"></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">{{repo.name}}</h4><p class="list-group-item-text">{{repo.description}}</p></div>
+            <div class="col-xs-2 col-sm-1"><p class="text-success"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></p></div>
+            <div class="col-xs-2 col-sm-2">GitHub</div>
+          </div>
+        </a>
+        <!--
+        <a href="#" class="list-group-item list-group-item-success">
+          <div class="row">
+            <div class="hidden-xs col-sm-1"><img src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" style="width:100%"></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">nodejs-chat</h4><p class="list-group-item-text">A very complete chat application using nodejs</p></div>
+            <div class="col-xs-2 col-sm-1"><p class="text-success"><i class="fa fa-check-circle fa-lg" aria-hidden="true"></i></p></div>
+            <div class="col-xs-2 col-sm-2">OpenShift</div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-danger">
+          <div class="row">
+            <div class="hidden-xs col-sm-1"><img src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" style="width:100%"></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">nodejs-chat</h4><p class="list-group-item-text">A very complete chat application using nodejs</p></div>
+            <div class="col-xs-2 col-sm-1"><p class="text-danger"><i class="fa fa-times-circle fa-lg" aria-hidden="true"></i></p></div>
+            <div class="col-xs-2 col-sm-2">GitHub</div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-warning">
+          <div class="row">
+            <div class="hidden-xs col-sm-1"><img src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" style="width:100%"></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">nodejs-chat</h4><p class="list-group-item-text">A very complete chat application using nodejs</p></div>
+            <div class="col-xs-2 col-sm-1"><p class="text-warning"><i class="fa fa-exclamation-circle fa-lg" aria-hidden="true"></i></p></div>
+            <div class="col-xs-2 col-sm-2">OpenShift</div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-info">
+          <div class="row">
+            <div class="hidden-xs col-sm-1"><img src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" style="width:100%"></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">nodejs-chat</h4><p class="list-group-item-text">A very complete chat application using nodejs</p></div>
+            <div class="col-xs-2 col-sm-1"><p class="text-info"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></p></div>
+            <div class="col-xs-2 col-sm-2">OpenShift</div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item  list-group-item-info disabled">
+          <div class="row">
+            <div class="hidden-xs col-sm-1"><img src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" style="width:100%"></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">nodejs-chat</h4><p class="list-group-item-text">A very complete chat application using nodejs</p></div>
+            <div class="col-xs-2 col-sm-1"><p></p></div>
+            <div class="col-xs-2 col-sm-2">Code only</div>
+          </div>
+        </a>
+        -->
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
