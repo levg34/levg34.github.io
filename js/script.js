@@ -37,10 +37,13 @@ app.controller('projectListCtrl', function($scope,$http) {
 						repo.check = 'success'
 						repo.check_icon = 'check'
 					}).catch(function(error) {
-						//if (error.data) {
+						if (error.status==-1) {
 							repo.check = 'danger'
 							repo.check_icon = 'times'
-						//}
+						} else {
+							repo.check = 'warning'
+							repo.check_icon = 'exclamation'
+						}
 						
 						console.log(error)
 					})
