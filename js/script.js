@@ -15,6 +15,37 @@ app.controller('projectListCtrl', function($scope,$http) {
 			url: requestUrl
 		}).then(function(projects) {
 			$scope.projects = projects.data
+			$scope.projects.forEach(function(repo) {
+				repo.check = 'info'
+				repo.check_icon = 'question'
+				if (!repo.homepage) {
+					repo.homepage='#'
+					repo.host = 'Code only'
+					repo.disabled = 'disabled'
+				} else {
+					if (repo.homepage.indexOf('github.io')!=-1) {
+						repo.host = 'GitHub'
+					} else if (repo.homepage.indexOf('rhcloud.com')!=-1) {
+						repo.host = 'OpenShift'
+					} else {
+						repo.host = 'Unknown'
+					}
+					$http({
+						method: 'GET',
+						url: ''
+					}).then(function(projects) {
+						repo.check = 'success'
+						repo.check_icon = 'check'
+					}).catch(function(error) {
+						//if (error.data) {
+							repo.check = 'danger'
+							repo.check_icon = 'times'
+						//}
+						
+						console.log(error)
+					})
+				}
+			})
 		}).catch(function(error) {
 			console.log(error)
 		})
