@@ -6,6 +6,7 @@ var pass = localStorage.token
 var remainingRequests = 60
 var requestLimitReset = 0
 var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'pushed'
+var errorCodes = [404,500]
 
 app.controller('projectListCtrl', function($scope,$http) {
 	$scope.projects = []
@@ -23,6 +24,9 @@ app.controller('projectListCtrl', function($scope,$http) {
 					repo.host = 'Code only'
 					repo.disabled = 'disabled'
 				} else {
+					if (repo.homepage=='https://levg34.github.io') {
+						repo.active = 'active'
+					}
 					if (repo.homepage.indexOf('github.io')!=-1) {
 						repo.host = 'GitHub'
 					} else if (repo.homepage.indexOf('rhcloud.com')!=-1) {
@@ -40,6 +44,9 @@ app.controller('projectListCtrl', function($scope,$http) {
 						if (!error.status||error.status<0) {
 							//repo.check = 'danger'
 							//repo.check_icon = 'times'
+						} else if (errorCodes.indexOf(error.status)!=-1) {
+							repo.check = 'danger'
+							repo.check_icon = 'times'
 						} else {
 							repo.check = 'warning'
 							repo.check_icon = 'exclamation'
