@@ -43,7 +43,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 						var htmlDoc = $(response.data)
 						for (var i=0;i<htmlDoc.length;++i) {
 							if($(htmlDoc[i]).is('link[rel=icon]')){
-								console.log($(htmlDoc[i]).attr('href'))
+								repo.favicon = repo.homepage+$(htmlDoc[i]).attr('href')
 							}
 						}
 						repo.check = 'success'
