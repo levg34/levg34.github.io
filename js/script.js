@@ -43,7 +43,17 @@ app.controller('projectListCtrl', function($scope,$http) {
 						var htmlDoc = $(response.data)
 						for (var i=0;i<htmlDoc.length;++i) {
 							if($(htmlDoc[i]).is('link[rel=icon]')){
-								repo.favicon = repo.homepage+$(htmlDoc[i]).attr('href')
+								var favicon = $(htmlDoc[i]).attr('href')
+								if (favicon[0]=='.') {
+									favicon = favicon.substring(1)
+								}
+								if (favicon[0]=='/'&&repo.homepage[repo.homepage.length-1]=='/') {
+									favicon = favicon.substring(1)
+								}
+								if (favicon[0]!='/'&&repo.homepage[repo.homepage.length-1]!='/') {
+									favicon = '/'+favicon
+								}
+								repo.favicon = repo.homepage+favicon
 							}
 						}
 						repo.check = 'success'
