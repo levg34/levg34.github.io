@@ -27,7 +27,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 				} else {
 					if (repo.homepage=='https://levg34.github.io') {
 						repo.active = 'active'
-						repo.favicon = 'favicon.ico'
+						repo.favicon = $('link[rel="icon"]')[0].href
 					}
 					if (repo.homepage.indexOf('github.io')!=-1) {
 						repo.host = 'GitHub'
@@ -40,9 +40,12 @@ app.controller('projectListCtrl', function($scope,$http) {
 						method: 'GET',
 						url: repo.homepage
 					}).then(function(response) {
-						console.log($(response.data))
-						console.log($(response.data).find('link[rel="icon"]'))
-						console.log($('link[rel="icon"]')[0].href)
+						var htmlDoc = $(response.data)
+						for (var i=0;i<htmlDoc.length;++i) {
+							if($(htmlDoc[i]).is('link[rel=icon]')){
+								console.log($(htmlDoc[i]).attr('href'))
+							}
+						}
 						repo.check = 'success'
 						repo.check_icon = 'check'
 					}).catch(function(error) {
