@@ -19,6 +19,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 			$scope.projects.forEach(function(repo) {
 				repo.check = 'info'
 				repo.check_icon = 'question'
+				repo.favicon = 'https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png'
 				if (!repo.homepage) {
 					repo.homepage='#'
 					repo.host = 'Code only'
@@ -26,6 +27,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 				} else {
 					if (repo.homepage=='https://levg34.github.io') {
 						repo.active = 'active'
+						repo.favicon = 'favicon.ico'
 					}
 					if (repo.homepage.indexOf('github.io')!=-1) {
 						repo.host = 'GitHub'
@@ -37,7 +39,10 @@ app.controller('projectListCtrl', function($scope,$http) {
 					$http({
 						method: 'GET',
 						url: repo.homepage
-					}).then(function(projects) {
+					}).then(function(response) {
+						console.log($(response.data))
+						console.log($(response.data).find('link[rel="icon"]'))
+						console.log($('link[rel="icon"]')[0].href)
 						repo.check = 'success'
 						repo.check_icon = 'check'
 					}).catch(function(error) {
@@ -51,7 +56,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 							repo.check = 'warning'
 							repo.check_icon = 'exclamation'
 						}
-						console.log(error)
+						//console.log(error)
 					})
 				}
 			})
