@@ -34,7 +34,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 					} else if (repo.name=='image-uploader') {
 						repo.favicon = 'http://uploader-levg34.rhcloud.com/icon.png'
 					} else if (repo.name=='openshift-sync') {
-						repo.favicon = 'http://sync-levg34.rhcloud.com/icon.png'
+						repo.favicon = 'http://sync-levg34.rhcloud.com/ping'
 					}
 					if (repo.homepage.indexOf('github.io')!=-1) {
 						repo.host = 'GitHub'
