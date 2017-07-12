@@ -32,7 +32,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 					}
 					$http({
 						method: 'GET',
-						url: ''
+						url: repo.homepage
 					}).then(function(projects) {
 						repo.check = 'success'
 						repo.check_icon = 'check'
@@ -44,7 +44,6 @@ app.controller('projectListCtrl', function($scope,$http) {
 							repo.check = 'warning'
 							repo.check_icon = 'exclamation'
 						}
-						
 						console.log(error)
 					})
 				}
