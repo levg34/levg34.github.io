@@ -19,7 +19,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 			$scope.projects.forEach(function(repo) {
 				repo.check = 'info'
 				repo.check_icon = 'question'
-				repo.favicon = 'https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png'
+				repo.favicon = 'img/GitHub-Mark.png'
 				if (!repo.homepage) {
 					repo.homepage='#'
 					repo.host = 'Code only'
@@ -27,7 +27,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 				} else {
 					if (repo.homepage=='https://levg34.github.io') {
 						repo.active = 'active'
-						repo.favicon = $('link[rel="icon"]')[0].href
+						repo.favicon = $('link[rel=icon]')[0].href
 					}
 					if (repo.name=='nodejs-chat') {
 						repo.favicon = 'http://nodechat-levg34.rhcloud.com/img/favicon.ico'
