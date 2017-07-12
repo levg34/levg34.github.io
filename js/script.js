@@ -29,6 +29,9 @@ app.controller('projectListCtrl', function($scope,$http) {
 						repo.active = 'active'
 						repo.favicon = $('link[rel="icon"]')[0].href
 					}
+					if (repo.name=='nodejs-chat') {
+						repo.favicon = 'http://nodechat-levg34.rhcloud.com/img/favicon.ico'
+					}
 					if (repo.homepage.indexOf('github.io')!=-1) {
 						repo.host = 'GitHub'
 					} else if (repo.homepage.indexOf('rhcloud.com')!=-1) {
