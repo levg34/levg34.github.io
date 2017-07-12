@@ -37,7 +37,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 						repo.check = 'success'
 						repo.check_icon = 'check'
 					}).catch(function(error) {
-						if (error.status<0) {
+						if (!error.status||error.status<0) {
 							//repo.check = 'danger'
 							//repo.check_icon = 'times'
 						} else {
