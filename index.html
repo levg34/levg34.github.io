@@ -18,9 +18,9 @@
         <a href="{{repo.homepage}}" class="list-group-item list-group-item-{{repo.check}} {{repo.disabled}} {{repo.active}}" ng-repeat="repo in projects">
           <div class="row">
             <div class="hidden-xs col-sm-1"><img src="{{repo.favicon}}" style="width:100%"></div>
-            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">{{repo.name}}</h4><p class="list-group-item-text">{{repo.description}}</p></div>
+            <div class="col-xs-8 col-sm-8"><h4 class="list-group-item-heading">{{repo.name}} <span class="pull-right" ng-show="repo.travis_url"><img src="{{repo.travis_url}}"></span></h4><p class="list-group-item-text">{{repo.description}}</p></div>
             <div class="col-xs-1 col-sm-1"><p ng-show="repo.homepage!='#'"><i class="fa fa-{{repo.check_icon}}-circle fa-lg" aria-hidden="true"></i></p></div>
-            <div class="col-xs-3 col-sm-2">{{repo.host}}<div ng-show="repo.travis_url"><img src="{{repo.travis_url}}"></div></div>
+            <div class="col-xs-3 col-sm-2">{{repo.host}}</div>
           </div>
         </a>
         <!--
