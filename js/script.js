@@ -1,11 +1,12 @@
 var app = angular.module('app', [])
 
 var baseUrl = 'https://api.github.com'
+var travisAPI = 'https://api.travis-ci.org/'
 var user = 'levg34'
 var pass = localStorage.token
 var remainingRequests = 60
 var requestLimitReset = 0
-var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'pushed'
+var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'updated'
 var errorCodes = [404,500]
 
 app.controller('projectListCtrl', function($scope,$http) {
@@ -40,8 +41,11 @@ app.controller('projectListCtrl', function($scope,$http) {
 						repo.host = 'GitHub'
 					} else if (repo.homepage.indexOf('rhcloud.com')!=-1) {
 						repo.host = 'OpenShift'
+					} else if (repo.homepage.indexOf('firebaseapp.com')!=-1) {
+						repo.host = 'Firebase'
+						repo.travis_url = travisAPI+user+'/'+repo.name+'.svg?branch=master'
 					} else {
-						repo.host = 'Unknown'
+						repo.host = 'Other'
 					}
 					$http({
 						method: 'GET',
