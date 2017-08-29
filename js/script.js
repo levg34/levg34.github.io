@@ -41,7 +41,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 						repo.host = 'GitHub'
 					} else if (repo.homepage.indexOf('rhcloud.com')!=-1) {
 						repo.host = 'OpenShift'
-					} else if (repo.homepage.indexOf('firebaseapp.com')!=-1) {
+					} else if (repo.homepage.indexOf('firebaseapp.com')!=-1||repo.homepage.indexOf('cloudfunctions.net')!=-1) {
 						repo.host = 'Firebase'
 						repo.travis_url = travisAPI+user+'/'+repo.name+'.svg?branch=master'
 					} else {
