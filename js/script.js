@@ -41,6 +41,8 @@ app.controller('projectListCtrl', function($scope,$http) {
 						repo.host = 'GitHub'
 					} else if (repo.homepage.indexOf('rhcloud.com')!=-1) {
 						repo.host = 'OpenShift'
+					} else if (repo.homepage.indexOf('herokuapp.com')!=-1) {
+						repo.host = 'Heroku'
 					} else if (repo.homepage.indexOf('firebaseapp.com')!=-1||repo.homepage.indexOf('cloudfunctions.net')!=-1) {
 						repo.host = 'Firebase'
 						repo.travis_url = travisAPI+user+'/'+repo.name+'.svg?branch=master'
@@ -73,6 +75,27 @@ app.controller('projectListCtrl', function($scope,$http) {
 						if (!error.status||error.status<0) {
 							//repo.check = 'danger'
 							//repo.check_icon = 'times'
+							$http({
+								method: 'GET',
+								url: 'https://check-upstate.herokuapp.com/up?url='+repo.homepage
+							}).then(function(response) {
+								var code = response.data.code
+								if (!code||code<0) {
+									//repo.check = 'danger'
+									//repo.check_icon = 'times'
+								} else if (code==200) {
+									repo.check = 'success'
+									repo.check_icon = 'check'
+								} else if (errorCodes.indexOf(code)!=-1) {
+									repo.check = 'danger'
+									repo.check_icon = 'times'
+								} else {
+									repo.check = 'warning'
+									repo.check_icon = 'exclamation'
+								}
+							}).catch(function(error) {
+								//console.log(error)
+							})
 						} else if (errorCodes.indexOf(error.status)!=-1) {
 							repo.check = 'danger'
 							repo.check_icon = 'times'
