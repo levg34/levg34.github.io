@@ -8,6 +8,7 @@ var remainingRequests = 60
 var requestLimitReset = 0
 var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'updated'
 var errorCodes = [404,500]
+var dangerErrors = ['ENOTFOUND','EAI_AGAIN']
 
 app.controller('projectListCtrl', function($scope,$http) {
 	$scope.projects = []
@@ -81,8 +82,11 @@ app.controller('projectListCtrl', function($scope,$http) {
 							}).then(function(response) {
 								var code = response.data.code
 								if (!code||code<0) {
-									//repo.check = 'danger'
-									//repo.check_icon = 'times'
+									var reserror = response.data.error
+									if (dangerErrors.indexOf(reserror.code)!=-1) {
+										repo.check = 'danger'
+										repo.check_icon = 'times'
+									}
 								} else if (code==200) {
 									repo.check = 'success'
 									repo.check_icon = 'check'
