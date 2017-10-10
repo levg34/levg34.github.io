@@ -6,7 +6,7 @@ var user = 'levg34'
 var pass = localStorage.token
 var remainingRequests = 60
 var requestLimitReset = 0
-var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'updated'
+var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'pushed'
 var errorCodes = [404,500]
 var dangerErrors = ['ENOTFOUND','EAI_AGAIN']
 
@@ -30,13 +30,6 @@ app.controller('projectListCtrl', function($scope,$http) {
 					if (repo.homepage=='https://levg34.github.io') {
 						repo.active = 'active'
 						repo.favicon = $('link[rel=icon]')[0].href
-					}
-					if (repo.name=='nodejs-chat') {
-						repo.favicon = 'http://nodechat-levg34.rhcloud.com/img/favicon.ico'
-					} else if (repo.name=='image-uploader') {
-						repo.favicon = 'http://uploader-levg34.rhcloud.com/icon.png'
-					} else if (repo.name=='openshift-sync') {
-						repo.favicon = 'http://sync-levg34.rhcloud.com/ping'
 					}
 					if (repo.homepage.indexOf('github.io')!=-1) {
 						repo.host = 'GitHub'
