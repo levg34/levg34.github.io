@@ -14,6 +14,10 @@
       <h1>Welcome to levg34 personal pages</h1>
       <h2>List of my GitHub projects</h2>
       <h3>Ordered by "last commit"</h3>
+      <div ng-controller="waitCheckCtrl">
+        <div ng-show="loading" class="alert alert-info"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please wait while the upstate of each project is being tested...</div>
+        <div ng-show="error.show" class="alert alert-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> An error occured trying to test projects upstate.</div>
+      </div>
       <div class="list-group" ng-controller="projectListCtrl">
         <a href="{{repo.homepage}}" class="list-group-item list-group-item-{{repo.check}} {{repo.disabled}} {{repo.active}}" ng-repeat="repo in projects">
           <div class="row">

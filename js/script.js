@@ -2,6 +2,7 @@ var app = angular.module('app', [])
 
 var baseUrl = 'https://api.github.com'
 var travisAPI = 'https://api.travis-ci.org/'
+var checkUrl = 'https://check-upstate.herokuapp.com/up'
 var user = 'levg34'
 var pass = localStorage.token
 var remainingRequests = 60
@@ -71,7 +72,7 @@ app.controller('projectListCtrl', function($scope,$http) {
 							//repo.check_icon = 'times'
 							$http({
 								method: 'GET',
-								url: 'https://check-upstate.herokuapp.com/up?url='+repo.homepage
+								url: checkUrl+'?url='+repo.homepage
 							}).then(function(response) {
 								var code = response.data.code
 								if (!code||code<0) {
@@ -109,4 +110,22 @@ app.controller('projectListCtrl', function($scope,$http) {
 		})
 	}
 	$scope.refreshProjectList()
+})
+
+app.controller('waitCheckCtrl', function($scope,$http) {
+	$scope.loading = true
+	$scope.error = {}
+	$scope.check = function() {
+		$http({
+			method: 'GET',
+			url: checkUrl
+		}).then(function(response) {
+			$scope.loading = false
+		}).catch(function(error) {
+			$scope.loading = false
+			$scope.error = error
+			$scope.error.show = true
+		})
+	}
+	$scope.check()
 })
