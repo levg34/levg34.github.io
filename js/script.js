@@ -7,7 +7,7 @@ var user = 'levg34'
 var pass = localStorage.token
 var remainingRequests = 60
 var requestLimitReset = 0
-var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'pushed'
+var requestUrl = baseUrl+'/users/'+user+'/repos?sort='+'pushed'+'&per_page=100'
 var errorCodes = [404,500]
 var dangerErrors = ['ENOTFOUND','EAI_AGAIN']
 
