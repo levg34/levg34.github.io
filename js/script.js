@@ -2,7 +2,7 @@ var app = angular.module('app', [])
 
 var baseUrl = 'https://api.github.com'
 var travisAPI = 'https://api.travis-ci.org/'
-var checkUrl = 'https://check-upstate.herokuapp.com/up'
+var checkUrl = 'https://remy-vps.guilhemdross.fr/upstate/up'
 var user = 'levg34'
 var pass = localStorage.token
 var remainingRequests = 60
